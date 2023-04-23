@@ -22,6 +22,7 @@ header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   font-family: monospace;
   text-align: center;
+  font-size: 28px;
 }
 
 h1 {
@@ -46,7 +47,7 @@ nav li:last-child {
 }
 
 nav a {
-  font-size: 18px;
+  font-size: 28px;
 }
 
 /* Main content styles */
