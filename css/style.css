@@ -1,16 +1,14 @@
 /* Global styles */
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #333;
+  background-color: #FEE7D8;
+  font-family: monospace;
+  text-align: center;
 }
 
 a {
-  color: #0099ff;
-  text-decoration: none;
+  color: #FF857F;
 }
+
 
 a:hover {
   text-decoration: underline;
