@@ -19,6 +19,7 @@ a:hover {
 header {
   background-color: #CDDEAF;
   padding: 20px;
+  padding-left: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   font-family: monospace;
   text-align: center;
