@@ -53,6 +53,14 @@ nav a {
 main {
   padding: 20px;
   font-size: 20px;
+  
+}
+
+main {
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
 }
 
 h2 {
