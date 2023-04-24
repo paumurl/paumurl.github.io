@@ -161,6 +161,9 @@ section {
     padding-left: 20px;
     font-size: 20px;
     text-align: center;
-  line-height: 130%
+  line-height: 130%;
+  width: 80%; /* set the width to 100% */
+  display: flex; /* use flexbox */
+  justify-content: center;
 }
 }
