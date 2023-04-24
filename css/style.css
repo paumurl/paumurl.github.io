@@ -167,8 +167,6 @@ section {
       div {
     width: 80%;
     text-align: center;
-  }
-  .container {
   display: flex;
   flex-direction: column;
 }
