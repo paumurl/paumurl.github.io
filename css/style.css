@@ -113,19 +113,25 @@ section {
   line-height: 28px;
 }
 
-/* Responsive styles
+/* Responsive styles */
 @media only screen and (max-width: 768px) {
   header {
     text-align: center;
   }
   
-  nav {
-    margin-top: 10px;
-    text-align: center;
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
   nav li {
     display: block;
     margin: 0;
+    text-align: center;
   }
-} */
+  
+  main {
+    padding: 70px 20px 50px 20px;
+  }
+}
