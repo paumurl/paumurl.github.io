@@ -118,6 +118,10 @@ section {
   font-size: 20px;
 }
 
+.parent-container {
+  white-space: nowrap;
+}
+
 .image-container{
   display: inline-block; 
   vertical-align: middle;
