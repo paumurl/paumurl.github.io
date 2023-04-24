@@ -183,8 +183,9 @@ section {
 
  .text-container{
  display: flex; /* use flexbox */
- justify-content: center; /* center horizontally */
+ justify-content: left; /* center horizontally */
  flex-direction: column;
+   text-align: left;
  margin-top: 10px;
    width: 80%;
    margin: 0;
