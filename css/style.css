@@ -188,7 +188,7 @@ section {
  display: flex; /* use flexbox */
         justify-content: center; /* center horizontally */
         flex-direction: column;
-    padding-left: 10px;
+    padding-left: 0px;
 }
 
  .text-container{
