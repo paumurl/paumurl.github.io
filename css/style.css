@@ -166,13 +166,10 @@ section {
   
       div {
     width: 80%;
-    display: block;
+    display: grid;
     text-align: center;
   }
-  img {
-    width: 80%;
-    height: 80%;
-  }
+
   
   div:last-child {
     margin-top: 10px;
