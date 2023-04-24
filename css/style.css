@@ -147,7 +147,7 @@ section {
 
 li {
     margin-bottom: 20px;
-    padding: 12px 24px;
+    padding: 24px 24px;
     font-size: 20px;
 }
 
@@ -172,9 +172,4 @@ section {
 }
 
   
-  div:last-child {
-    margin-top: 10px;
-    /*margin-left: 0px;*/
-    text-align: center;
-  }
 }
