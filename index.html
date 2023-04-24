@@ -12,6 +12,17 @@
       max-width: 100%;
       height: auto;
     }
+    
+    @media screen and (max-width: 900px) {
+      section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .image-container, .text-container {
+        display: flex;
+        margin: 0;
+      }
     </style>
   </head>
   <body>
@@ -43,16 +54,15 @@
         <br/>
         ⭐ Currently learning more about REST APIs and MLOps!
       </section>
-      <section>
-        </br>
-        <div style="display: inline-block; vertical-align: middle;">
-          <img src="./images/new_dog_dev.png" alt="Doggo fixing computer issues" width="300" height="200">
-        </div>
-        <div style="display: inline-block; margin-left: 40px; vertical-align: middle;">
-          ✉️ <a href="mailto:paularobleslopez@gmail.com">paularobleslopez@gmail.com</a> <br/>
-          Copyright © 2023 Paula
-        </div>
-      </section>
+  <section>
+    <div class="image-container" style="display: inline-block; vertical-align: middle;">
+      <img src="./images/new_dog_dev.png" alt="Doggo fixing computer issues">
+    </div>
+    <div class="text-container" style="display: inline-block; margin-left: 20px; vertical-align: middle;">
+      ✉️ <a href="mailto:paularobleslopez@gmail.com">paularobleslopez@gmail.com</a> <br>
+      Copyright © 2023 Paula
+    </div>
+  </section>
     </main>
   </body>
 </html>
