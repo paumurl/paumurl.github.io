@@ -176,7 +176,7 @@ section {
   
   div:last-child {
     margin-top: 10px;
-    margin-left: 0px;
+    /*margin-left: 0px;*/
     text-align: center;
   }
 }
