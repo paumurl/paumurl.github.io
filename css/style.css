@@ -118,6 +118,18 @@ section {
   font-size: 20px;
 }
 
+.image-container{
+  display: inline-block; 
+  vertical-align: middle;
+}
+
+ .text-container{
+   display: inline-block; 
+   margin-left: 50px; 
+   vertical-align: middle;
+}  
+  
+
 /* Responsive styles */
 /* mobile */
 @media (max-width: 900px) {
