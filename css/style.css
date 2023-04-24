@@ -166,9 +166,12 @@ section {
   
       div {
     width: 80%;
-    display: grid;
     text-align: center;
   }
+  .container {
+  display: flex;
+  flex-direction: column;
+}
 
   
   div:last-child {
