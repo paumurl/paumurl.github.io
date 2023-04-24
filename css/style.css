@@ -173,6 +173,7 @@ section {
         display: flex; /* use flexbox */
         justify-content: center; /* center horizontally */
         flex-direction: column;
+        line-height: 130%;
       }
   
   .image-container{
