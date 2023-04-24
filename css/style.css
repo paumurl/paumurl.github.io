@@ -13,7 +13,7 @@ a {
 
 
 a:hover {
-  /*text-decoration: underline; */
+  text-decoration: underline;
 }
 
 /* Header styles */
@@ -62,6 +62,14 @@ nav li:last-child {
 
 nav a {
   font-size: 24px;
+  color: #FF857F;
+  text-decoration: none !important;
+}
+
+
+nav a:hover {
+  text-decoration: underline;
+}
 }
 
 /* Main content styles */
