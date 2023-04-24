@@ -21,7 +21,7 @@ a:hover {
 header {
   padding: 5px;
   padding-bottom: 20px;
-  background-color: #9C514E;
+  background-color: #FFF8F4;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   font-family: monospace;
   text-align: center;
@@ -87,7 +87,7 @@ h2 {
   font-size: 20px;
   margin-top: 0;
   margin-bottom: 10px;
-  color: #FA6961;
+  color: #9C514E;
   text-align: center;
 }
 
