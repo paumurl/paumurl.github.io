@@ -165,7 +165,7 @@ section {
         padding-top: 10px;
         padding-right: 20px;
         padding-bottom: 20px;
-        padding-left: 20px;
+        padding-left: 40px;
         font-size: 20px;
         text-align: center;
         line-height: 130%;
@@ -182,8 +182,9 @@ section {
 
  .text-container{
  display: flex; /* use flexbox */
-        justify-content: center; /* center horizontally */
-        flex-direction: column;
+ justify-content: center; /* center horizontally */
+ flex-direction: column;
+ margin-top: 10px;
 }  
 
 }
