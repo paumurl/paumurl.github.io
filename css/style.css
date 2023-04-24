@@ -29,9 +29,10 @@ header {
 
 h1 {
   margin: 0;
+  padding-top:70px;
   font-size: 32px;
   color: #FF857F;
-  text-align: left;
+  text-align: center;
 }
 
 nav ul {
@@ -85,7 +86,7 @@ h2 {
   margin-top: 0;
   margin-bottom: 10px;
   color: #000000;
-  text-align: left;
+  text-align: center;
 }
 
 ul {
