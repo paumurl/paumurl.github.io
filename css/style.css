@@ -126,8 +126,23 @@ section {
     }
 
     div {
-        width:80%;
-    }
+    width: 80%;
+    display: block;
+    text-align: center;
+  }
+  img {
+    width: 80%;
+    height: auto;
+  }
+  
+  div:last-child {
+    margin-top: 10px;
+    margin-left: 0px;
+    text-align: center;
+  }
+
+
+
 
     h1 {
         font-size: 32px;
