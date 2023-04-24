@@ -184,10 +184,11 @@ section {
  .text-container{
  display: flex; /* use flexbox */
  justify-content: center; /* center horizontally */
- flex-direction: row;
+ flex-direction: column;
  margin-top: 10px;
    width: 80%;
-   margin: 0
+   margin: 0;
+   padding: 0
 }  
   
   h1 {
