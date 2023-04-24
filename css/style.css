@@ -2,8 +2,8 @@
 body {
   background-color: #FEE7D8;
   font-family: monospace;
-  text-align: center;
-  font-size: 18px;
+  font-size: 16px;
+  text-align: left;
 }
 
 a {
@@ -55,7 +55,8 @@ nav a {
 /* Main content styles */
 main {
   padding: 20px;
-  font-size: 20px;
+  font-size: 16px;
+  text-align: left;
   
 }
 
@@ -63,11 +64,12 @@ main {
   padding-top: 50px;
   padding-right: 30px;
   padding-bottom: 50px;
-  padding-left: 80px;
+  padding-left: 100px;
+  text-align: left;
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 20px;
   margin-top: 0;
   margin-bottom: 10px;
   color: #000000;
@@ -90,7 +92,7 @@ footer {
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive styles */
+/* Responsive styles
 @media only screen and (max-width: 768px) {
   header {
     text-align: center;
@@ -105,4 +107,4 @@ footer {
     display: block;
     margin: 0;
   }
-}
+} */
