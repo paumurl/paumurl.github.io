@@ -50,6 +50,7 @@ nav li {
     margin-top: 12px;
     font-size: 20px;
     line-height: 28px;
+    text-align: center;
 }
 
 li {
@@ -119,5 +120,19 @@ section {
 
 /* Responsive styles */
 /* mobile */
+@media (max-width: 900px) {
+    
+    body {
+        font-size: 16px;
+    }
 
+    div {
+        width:80%;
+    }
+
+    h1 {
+        line-height: 130%;
+    }
+
+}
 
