@@ -145,6 +145,21 @@ section {
     h1 {
         line-height: 130%;
     }
+     
+    nav li {
+      display: block;
+      margin-right: 0;
+      margin-top: 20px;
+      font-size: 24px;
+      line-height: 36px;
+    }
+
+    li {
+      margin-bottom: 20px;
+      padding: 12px 24px;
+      font-size: 20px;
+      border-radius: 0;
+    }
 
 }
 
