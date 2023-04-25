@@ -228,3 +228,24 @@ section {
 
   }
 }
+
+
+@media only screen and (min-width: 900px) and (max-width: 1000px) {
+	.parent-container{
+    display: block;
+    margin:0 auto !important;
+    width: 80%;
+  }
+   .text-container{
+   display: block; /* use flexbox */
+   justify-content: left; /* center horizontally */
+   flex-direction: column;
+   text-align: left;
+   margin-top: 10px;
+   width: 80%;
+   margin: 0;
+   padding-top: 20px;
+   font-size: 20px;
+}  
+
+}
