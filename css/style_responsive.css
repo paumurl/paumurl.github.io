@@ -13,7 +13,7 @@ h1 {
   margin: 0;
   padding-top: 24px;
   font-size: 36px;
-  color: #FF857F;
+  color: #313149;
   text-align: center;
 }
 
@@ -92,7 +92,6 @@ main {
   margin-right: 24%;
   /*text-align: left;*/
   color: #313149;
-  padding-top: 30px;
 }
 
 ul {
@@ -209,20 +208,14 @@ section {
    display: block; /* use flexbox */
    justify-content: center; /* center horizontally */
    flex-direction: column;
-   text-align: center
-   margin-top: 10px;
+   text-align: center;
    margin: 0;
-   padding-top: 30px;
-   padding-bottom: 30px;
-   font-size: 18px;
-}  
+  }  
 
  
   img{
    height: auto;
-   
+   margin-bottom: 30px;
   }
  
 }
-
-
