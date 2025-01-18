@@ -112,10 +112,11 @@ footer {
 section {
   line-height: 28px;
   padding-top: 20px;
-  padding-right: 25%;
+  padding-right: 30%;
   padding-bottom: 10px;
-  padding-left: 25%;
+  padding-left: 30%;
   font-size: 20px;
+  text-align: center;
 }
 
 .parent-container {
