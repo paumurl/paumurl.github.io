@@ -1,48 +1,447 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>paula's secret web</title>
     <link rel="stylesheet" href="./css/style_responsive.css">
-    <link rel="icon"
-    type="image/x-icon" href="./images/favicon.ico">
-  </head>
-  <body>
-<header>
-      <h1> Paula Robles López </h1>
-      <h2> data scientist & computer biotechnologist </h2>
-      <nav>
-        <ul>
-          <li><a class="button" href="resume_PaulaRobles.pdf" target="_blank">résumé</a></li>
-          <li><a class="button" href="https://github.com/paumurl" target="_blank">projects</a></li>
-          <li><a class="button" href="https://www.linkedin.com/in/paula-robles-lopez/" target="_blank">linkedin</a></li>
-        </ul>
-      </nav>
-    </header> 
- <main>
-      <section>
-        </br>
-        A data scientist based in Madrid who enjoys coding, art, reading, watching films, rock climbing, and, most importantly, petting random dogs! 😆 <br/>
-        <br/> 
-        With almost 2 years of hands-on experience. My skillset covers Python, SQL analytics, DevOps practices, and cloud infrastructure.
-        <br/>
-        <br/>
-        🌠 Currently learning more about DevOps!
-      </section>
-<section>
-        </br>
-        <div class="parent-container">
-          <div class="image-container">
-            <img src="./images/new_dog_dev.png" alt="Doggo fixing computer issues" width="300" height="200">
-          </div>
-          <div class="text-container">
-             <a href="mailto:paularobleslopez@gmail.com">📩 paularobleslopez@gmail.com</a> <br/>
-            Copyright © 2025 Paula
-          </div>
-        </div>
-      </section>
-    </main>
-  </body>
-</html>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    
+    <!-- PIXEL GAME FONTS & STYLES -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* --- PIXEL STYLES --- */
+        .prelude-spacer {
+            height: 10000px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            overflow: hidden;
+            
+            /* Transparent gradient into pale red in the bottom */
+            background: linear-gradient(to bottom, 
+                rgba(255, 230, 230, 0) 0%,   /* Invisible/Transparent at top */
+                rgba(255, 230, 230, 0) 20%,  /* Stay invisible for a bit */
+                #ffe6e6 100%                 /* Solid pale red at bottom */
+            );
+            
+            pointer-events: none;
+        }
 
+        .scroll-msg {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            color: #aaa;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.8;
+            max-width: 90%;
+
+            /* INITIAL STATE (Hidden) */
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            filter: blur(8px);
+            transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .scroll-msg.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0px);
+        }
+
+        .scroll-msg.warning { color: #ff8888; }
+        
+        .scroll-msg.danger { 
+            color: #ff0000; 
+            font-size: 14px;
+            text-shadow: 0 0 5px rgba(255,0,0,0.1);
+        }
+
+        .scroll-msg.danger.visible {
+            animation: danger-pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes danger-pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+
+        /* --- FOOTER & EGG STYLES --- */
+        footer {
+            text-align: center;
+            padding-bottom: 80px;
+            /* BACKGROUND MATCH: Matches the very bottom of the gradient exactly */
+            background-color: #ffe6e6;
+            padding-top: 20px;
+            margin-top: -1px; /* Fixes any tiny pixel gap between spacer and footer */
+        }
+
+        #egg-trigger {
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            padding: 20px;
+            border: 3px dashed #ff3333;
+            /* Match the footer background so the box blends in */
+            background-color: #ffe6e6; 
+            user-select: none;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.2s;
+            pointer-events: auto;
+        }
+        
+        #egg-trigger:hover {
+            background-color: #ffcccc; /* Darker red on hover */
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            animation: egg-wiggle 1.2s ease-in-out infinite;
+            transform: scale(1.05);
+            border-color: red;
+        }
+
+        .warning-text {
+            font-family: 'Press Start 2P', cursive;
+            color: #ff0000;
+            font-size: 14px;
+            margin-bottom: 8px;
+            animation: blink 0.8s infinite;
+            text-transform: uppercase;
+            line-height: 1.6;
+        }
+
+
+        .pixel-egg {
+            font-size: 40px;
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* ANIMATIONS */
+        @keyframes blink { 50% { opacity: 0; } }
+
+        @keyframes egg-wiggle {
+            0%   { transform: rotate(0deg) translateX(0); }
+            15%  { transform: rotate(-3deg) translateX(-1px); }
+            30%  { transform: rotate(3deg) translateX(1px); }
+            45%  { transform: rotate(-2deg) translateX(-1px); }
+            60%  { transform: rotate(2deg) translateX(1px); }
+            75%  { transform: rotate(-1deg) translateX(-0.5px); }
+            100% { transform: rotate(0deg) translateX(0); }
+        }
+
+
+        /* --- GAME OVERLAY STYLES --- */
+        #game-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(20, 20, 30, 0.95);
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Press Start 2P', cursive;
+            image-rendering: pixelated;
+            user-select: none;
+            color: white;
+        }
+
+        #pack {
+            width: 220px; height: 320px;
+            background: repeating-linear-gradient(135deg, #ff4d4d, #ff4d4d 20px, #ff1a1a 20px, #ff1a1a 40px);
+            border: 4px solid #fff;
+            box-shadow: 8px 8px 0px #000;
+            cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
+            text-align: center;
+            position: relative;
+            transition: transform 0.2s;
+            font-size: 14px;
+        }
+        #pack:hover { transform: rotate(-3deg) scale(1.05); }
+        .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+
+        .card {
+            display: none;
+            width: 260px; height: 400px;
+            background: #f4f4f4;
+            border: 6px solid #222;
+            border-radius: 10px;
+            padding: 20px;
+            flex-direction: column; align-items: center; text-align: center;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
+            color: #333;
+        }
+        
+        .card-img-box {
+            width: 100%; height: 140px;
+            background: #ddd; border: 3px solid #000;
+            margin-bottom: 20px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 70px;
+            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+        }
+
+        /* --- UPDATED FONT SIZES HERE --- */
+        .card h3 { 
+            font-size: 18px; /* Increased from 14px */
+            margin: 0 0 15px 0; 
+            text-transform: uppercase; 
+            color: #000; 
+            line-height: 1.4; 
+        }
+        .card p { 
+            font-size: 13px; /* Increased from 10px */
+            line-height: 1.6; 
+            color: #444; 
+            margin: 0; 
+            font-family: monospace; 
+        }
+        
+        .card.common { border-color: #6c757d; }
+        .card.uncommon { border-color: #007bff; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
+        .card.rare { border-color: #ffd700; background: linear-gradient(135deg, #fff 0%, #fff9e6 100%); box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
+
+        .pixel-btn {
+            margin-top: 20px;
+            background: #fff; border: 4px solid #fff;
+            padding: 10px 15px;
+            font-family: 'Press Start 2P', cursive; font-size: 10px;
+            cursor: pointer; text-transform: uppercase;
+            box-shadow: 4px 4px 0px #000;
+        }
+        .pixel-btn:active { transform: translate(4px, 4px); box-shadow: none; }
+        .close-overlay { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; font-family: sans-serif; }
+
+        @keyframes shake { 10%, 90% { transform: translate3d(-2px, 0, 0); } 20%, 80% { transform: translate3d(4px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-8px, 0, 0); } 40%, 60% { transform: translate3d(8px, 0, 0); } }
+        @keyframes popIn { 0% { transform: scale(0) rotate(-10deg); opacity: 0; } 70% { transform: scale(1.1) rotate(2deg); } 100% { transform: scale(1) rotate(0deg); opacity: 1; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1> Paula Robles López </h1>
+        <h2> data scientist & computer biotechnologist </h2>
+        <nav>
+            <ul>
+                <li><a class="button" href="resume_PaulaRobles.pdf" target="_blank">résumé</a></li>
+                <li><a class="button" href="https://github.com/paumurl" target="_blank">projects</a></li>
+                <li><a class="button" href="https://www.linkedin.com/in/paula-robles-lopez/" target="_blank">linkedin</a></li>
+            </ul>
+        </nav>
+    </header> 
+    <main>
+        <section>
+            </br>
+            A data scientist based in Madrid who enjoys coding, art, reading, watching films, rock climbing, and, most importantly, petting random dogs! 😆 <br/>
+            <br/>
+            With over 2 years of hands-on experience. My skillset covers Python, SQL analytics, DevOps practices, and cloud infrastructure. <br/>
+            <br/>
+            🌠 Currently learning more about DevOps!
+        </section>
+        <section>
+            </br>
+            <div class="parent-container">
+                <div class="image-container">
+                    <img src="./images/new_dog_dev.png" alt="Doggo fixing computer issues" width="300" height="200">
+                </div>
+                <div class="text-container">
+                    <a href="mailto:paularobleslopez@gmail.com">📩 paularobleslopez@gmail.com</a> <br/>
+                    Copyright © 2025 Paula
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- THE OMINOUS PRELUDE (Scroll Down Messages) -->
+    <div class="prelude-spacer">
+        <div class="scroll-msg">This is the end of the page.</div>
+        <div class="scroll-msg">Ehm...</div>
+        <div class="scroll-msg">Why are you scrolling?</div>
+        <div class="scroll-msg">There is nothing down here.</div>
+        <div class="scroll-msg">Seriously, go back up.</div>
+        <div class="scroll-msg">I'm not hiding a secret game.</div>
+        <div class="scroll-msg">You are very stubborn...</div>
+        <div class="scroll-msg">…You’re still here?</div>
+        <div class="scroll-msg">Do you think something magical will appear?</div>
+        <div class="scroll-msg">I mean… it *might*.</div>
+        <div class="scroll-msg">But probably not.</div>
+        <div class="scroll-msg">Okay fine, maybe a little.</div>
+        <div class="scroll-msg warning">You’re getting close again…</div>
+        <div class="scroll-msg warning">Last reminder. Seriously.</div>
+        <div class="scroll-msg warning">I am warning you.</div>
+        <div class="scroll-msg warning">Do not touch the egg.</div>
+        <div class="scroll-msg warning">YOU DIDN’T LISTEN.</div>
+        <div class="scroll-msg warning">THE EGG IS AWAKENING.</div>
+        <div class="scroll-msg warning">TURN BACK BEFORE IT’S TOO LATE.</div>
+        <div class="scroll-msg warning">…Too late.</div>
+        <div class="scroll-msg danger">OKAY FINE.<br>AT YOUR OWN RISK.</div>
+    </div>
+
+    <!-- FOOTER WITH THE FORBIDDEN EGG -->
+    <footer>
+        <div id="egg-trigger" title="Nothing to see here...">
+            <div class="warning-text">
+                 DO NOT CLICK!<br>
+            </div>
+            <div class="pixel-egg">🥚</div>
+        </div>
+    </footer>
+
+    <!-- EASTER EGG GAME OVERLAY -->
+    <div id="game-overlay">
+        <div class="close-overlay" onclick="closeGame()">✕</div>
+        
+        <!-- PACK -->
+        <div id="pack" onclick="openPack()">
+            <div>
+                PAULA'S<br>MISTERY<br>PACK
+                <div style="font-size: 10px; margin-top: 10px; opacity: 0.8;">CLICK TO OPEN</div>
+            </div>
+        </div>
+
+        <!-- CARD -->
+        <div id="card-display" class="card">
+            <div class="card-img-box" id="card-emoji"></div>
+            <h3 id="card-title"></h3>
+            <p id="card-desc"></p>
+            <div style="margin-top:auto; font-size:8px; padding:4px; background:#000; color:#fff;" id="card-rarity"></div>
+        </div>
+
+        <!-- CONTROLS -->
+        <div id="game-controls" style="display:none; gap:10px;">
+            <button class="pixel-btn" onclick="drawNextCard()">NEXT</button>
+            <button class="pixel-btn" style="background:#ffcccc;" onclick="closeGame()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        /* --- 1. SCROLL ANIMATION OBSERVER --- */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.scroll-msg').forEach(msg => {
+            observer.observe(msg);
+        });
+
+
+        /* --- 2. GAME DATA --- */
+        const cards = [
+            { name: "Python Pro", rarity: "common", emoji: "🐍", desc: "Writes clean, scalable scripts to automate the boring stuff." },
+            { name: "SQL Sage", rarity: "common", emoji: "💾", desc: "Can query databases faster than you can say 'SELECT *'." },
+            { name: "GCP Scholar", rarity: "common", emoji: "☁️", desc: "Currently leveling up: Studying for the Google Cloud Data Engineer Certificate." },
+            { name: "On Repeat", rarity: "common", emoji: "🎧", desc: "Current obsession: 'Birds of a Feather' by Billie Eilish." },
+            
+            // UNCOMMON: Interests
+            { name: "Market Watcher", rarity: "uncommon", emoji: "📈", desc: "Lately obsessed with economics, investing, and analyzing market trends." },
+            { name: "Korean Foodie", rarity: "uncommon", emoji: "🥢", desc: "Powered by Kimchi and Bibimbap. Always looking for the best spicy food." },
+            { name: "Style Scout", rarity: "uncommon", emoji: "🕶️", desc: "Always trying to keep up with the latest trends in fashion and culture." },
+            { name: "Afterwork Hunter", rarity: "uncommon", emoji: "🍻", desc: "Laptop closed. Code pushed. Time to find the sunniest terrace for a tintito de verano." },
+            { name: "Seoul Wanderer", rarity: "uncommon", emoji: "🇰🇷", desc: "Recently explored Korea. Still dreaming about street markets, temples, and spicy food adventures." },
+            { name: "Future Japan Explorer", rarity: "rare", emoji: "🇯🇵", desc: "Next dream destination: Japan. Cherry blossoms, anime merch, and ramen quests are loading..." },
+            
+            // RARE: Meta / Fun
+            { name: "Card Collector", rarity: "rare", emoji: "🃏", desc: "Loves collecting Pokémon cards. (Wait, is this a card inside a card game?)" },
+            { name: "Shiny Hunter", rarity: "rare", emoji: "✨", desc: "An easter egg within an easter egg. You found the rarest card!" },
+            { name: "Southern Roots", rarity: "rare", emoji: "💃", desc: "Born & raised in Granada, now based in Madrid. Bringing Andalusian vibes (and the accent) to the capital." }
+        ]; 
+
+        /* --- 3. GAME LOGIC --- */
+        const trigger = document.getElementById('egg-trigger');
+        const overlay = document.getElementById('game-overlay');
+        const pack = document.getElementById('pack');
+        const cardDisplay = document.getElementById('card-display');
+        const controls = document.getElementById('game-controls');
+
+        // NEW: "Deck" System
+        let availableIndices = [];
+
+        if(trigger) {
+            trigger.addEventListener('click', () => {
+                launchGame();
+            });
+        }
+
+        function launchGame() {
+            overlay.style.display = 'flex';
+            resetDeck(); // Shuffle the deck when opening the game
+            resetGame();
+        }
+
+        function closeGame() {
+            overlay.style.display = 'none';
+        }
+
+        function resetGame() {
+            pack.style.display = 'flex';
+            cardDisplay.style.display = 'none';
+            controls.style.display = 'none';
+            pack.classList.remove('shake');
+        }
+
+        // --- DECK LOGIC ---
+        
+        function resetDeck() {
+            // Refill the array with numbers [0, 1, 2, ... up to cards.length]
+            availableIndices = cards.map((_, index) => index);
+        }
+
+        function getRandomCard() {
+            // 1. If the deck is empty, reshuffle!
+            if (availableIndices.length === 0) {
+                resetDeck();
+            }
+
+            // 2. Pick a random index from the *available* pool
+            const randomIndex = Math.floor(Math.random() * availableIndices.length);
+            const cardIndex = availableIndices[randomIndex];
+
+            // 3. Remove that number from the pool so it can't be picked again
+            availableIndices.splice(randomIndex, 1);
+
+            return cards[cardIndex];
+        }
+
+        function renderCard(card) {
+            document.getElementById('card-title').innerText = card.name;
+            document.getElementById('card-desc').innerText = card.desc;
+            document.getElementById('card-emoji').innerText = card.emoji;
+            document.getElementById('card-rarity').innerText = card.rarity;
+            cardDisplay.className = `card ${card.rarity}`;
+        }
+
+        function openPack() {
+            pack.classList.add('shake');
+            setTimeout(() => {
+                const card = getRandomCard();
+                renderCard(card);
+                pack.style.display = 'none';
+                cardDisplay.style.display = 'flex';
+                controls.style.display = 'flex';
+                
+                cardDisplay.style.animation = 'none';
+                cardDisplay.offsetHeight; 
+                cardDisplay.style.animation = 'popIn 0.6s ease-out';
+            }, 600);
+        }
+
+        function drawNextCard() {
+            cardDisplay.style.animation = 'none';
+            cardDisplay.offsetHeight; 
+            const card = getRandomCard();
+            renderCard(card);
+            cardDisplay.style.animation = 'popIn 0.4s ease-out';
+        }
+    </script>
+</body>
+</html>
