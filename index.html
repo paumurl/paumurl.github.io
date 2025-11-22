@@ -10,7 +10,114 @@
     <!-- PIXEL GAME FONTS & STYLES -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        /* --- PIXEL STYLES --- */
+        /* --- NEW UI WINKS & IMPROVEMENTS --- */
+        
+        /* 1. Custom Text Selection */
+        ::selection {
+            background: #ff4d4d;
+            color: white;
+            text-shadow: 2px 2px #000;
+        }
+
+        /* 2. IMPROVED BARK BUBBLE (Speech Bubble Style) */
+        .bark-bubble {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            color: #000;
+            background: #fff;
+            border: 3px solid #000;
+            padding: 8px 12px;
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: 100;
+            white-space: nowrap;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+            animation: popUpFade 1s ease-out forwards;
+        }
+        
+        .bark-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px 6px 0;
+            border-style: solid;
+            border-color: #000 transparent transparent transparent;
+        }
+
+        @keyframes popUpFade { 
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            20% { transform: translateY(-10px) scale(1.1); opacity: 1; } 
+            100% { transform: translateY(-60px) scale(1); opacity: 0; } 
+        }
+
+        /* 3. BALLOON/PARTY PARTICLES */
+        .party-particle {
+            position: fixed;
+            bottom: -10vh;
+            font-size: 30px;
+            z-index: 10000;
+            pointer-events: none;
+            animation: flyUp linear forwards;
+        }
+
+        @keyframes flyUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* 4. COIN ANIMATION */
+        .secret-coin {
+            position: fixed;
+            bottom: -50px;
+            font-size: 60px;
+            z-index: 99999;
+            pointer-events: none;
+            animation: coinJump 1.2s ease-out forwards;
+            filter: drop-shadow(4px 4px 0 #000);
+        }
+
+        @keyframes coinJump {
+            0% { transform: translateY(0) rotateY(0deg); opacity: 1; }
+            50% { transform: translateY(-60vh) rotateY(180deg); opacity: 1; }
+            100% { transform: translateY(-65vh) rotateY(360deg); opacity: 0; }
+        }
+
+        /* 5. NEW: SCROLL HINT ANIMATION */
+        .hint-container {
+            text-align: center;
+            margin-top: 60px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+            cursor: help;
+        }
+
+        .hint-arrow {
+            /* Changed to a standard font for the symbol so it renders cleanly */
+            font-family: sans-serif; 
+            font-size: 30px;
+            color: #ff4d4d;
+            line-height: 1;
+        }
+
+        .hint-text {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 10px;
+            text-transform: lowercase;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+
+        /* --- EXISTING STYLES --- */
         .prelude-spacer {
             height: 10000px;
             display: flex;
@@ -18,14 +125,11 @@
             justify-content: space-around;
             align-items: center;
             overflow: hidden;
-            
-            /* Transparent gradient into pale red in the bottom */
             background: linear-gradient(to bottom, 
-                rgba(255, 230, 230, 0) 0%,   /* Invisible/Transparent at top */
-                rgba(255, 230, 230, 0) 20%,  /* Stay invisible for a bit */
-                #ffe6e6 100%                 /* Solid pale red at bottom */
+                rgba(255, 230, 230, 0) 0%,   
+                rgba(255, 230, 230, 0) 20%,  
+                #ffe6e6 100%                 
             );
-            
             pointer-events: none;
         }
 
@@ -37,20 +141,13 @@
             text-align: center;
             line-height: 1.8;
             max-width: 90%;
-
-            /* INITIAL STATE (Hidden) */
             opacity: 0;
             transform: translateY(50px) scale(0.9);
             filter: blur(8px);
             transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        .scroll-msg.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0px);
-        }
-
+        .scroll-msg.visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
         .scroll-msg.warning { color: #ff8888; }
         
         .scroll-msg.danger { 
@@ -69,15 +166,12 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-
-        /* --- FOOTER & EGG STYLES --- */
         footer {
             text-align: center;
             padding-bottom: 80px;
-            /* BACKGROUND MATCH: Matches the very bottom of the gradient exactly */
             background-color: #ffe6e6;
             padding-top: 20px;
-            margin-top: -1px; /* Fixes any tiny pixel gap between spacer and footer */
+            margin-top: -1px;
         }
 
         #egg-trigger {
@@ -87,7 +181,6 @@
             text-align: center;
             padding: 20px;
             border: 3px dashed #ff3333;
-            /* Match the footer background so the box blends in */
             background-color: #ffe6e6; 
             user-select: none;
             border-radius: 8px;
@@ -97,7 +190,7 @@
         }
         
         #egg-trigger:hover {
-            background-color: #ffcccc; /* Darker red on hover */
+            background-color: #ffcccc;
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
             animation: egg-wiggle 1.2s ease-in-out infinite;
             transform: scale(1.05);
@@ -114,16 +207,9 @@
             line-height: 1.6;
         }
 
+        .pixel-egg { font-size: 40px; display: block; margin-top: 5px; }
 
-        .pixel-egg {
-            font-size: 40px;
-            display: block;
-            margin-top: 5px;
-        }
-
-        /* ANIMATIONS */
         @keyframes blink { 50% { opacity: 0; } }
-
         @keyframes egg-wiggle {
             0%   { transform: rotate(0deg) translateX(0); }
             15%  { transform: rotate(-3deg) translateX(-1px); }
@@ -134,14 +220,21 @@
             100% { transform: rotate(0deg) translateX(0); }
         }
 
+        /* --- DOGGO INTERACTION STYLE --- */
+        .image-container img {
+            cursor: pointer; 
+            transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .image-container img:active { transform: scale(0.9); }
+        .image-container img:hover { filter: brightness(1.1); transform: scale(1.02); }
 
-        /* --- GAME OVERLAY STYLES --- */
+        /* --- GAME OVERLAY STYLES & TRANSITION --- */
         #game-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(20, 20, 30, 0.95);
+            background: rgba(20, 20, 30, 0.98);
             z-index: 9999;
             flex-direction: column;
             justify-content: center;
@@ -150,6 +243,19 @@
             image-rendering: pixelated;
             user-select: none;
             color: white;
+            opacity: 0; 
+        }
+
+        /* CRT TURN ON EFFECT */
+        #game-overlay.crt-active {
+            display: flex;
+            animation: crtTurnOn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes crtTurnOn {
+            0% { transform: scaleX(0) scaleY(0.005); opacity: 0; }
+            50% { transform: scaleX(1) scaleY(0.005); opacity: 1; }
+            100% { transform: scaleX(1) scaleY(1); opacity: 1; }
         }
 
         #pack {
@@ -163,8 +269,20 @@
             position: relative;
             transition: transform 0.2s;
             font-size: 14px;
+            transform: scale(0);
+            opacity: 0;
         }
-        #pack:hover { transform: rotate(-3deg) scale(1.05); }
+
+        #pack.pack-appear {
+            animation: popPack 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards; 
+        }
+
+        @keyframes popPack {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        #pack:hover { transform: rotate(-3deg) scale(1.05) !important; }
         .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
 
         .card {
@@ -188,21 +306,8 @@
             font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
         }
 
-        /* --- UPDATED FONT SIZES HERE --- */
-        .card h3 { 
-            font-size: 18px; /* Increased from 14px */
-            margin: 0 0 15px 0; 
-            text-transform: uppercase; 
-            color: #000; 
-            line-height: 1.4; 
-        }
-        .card p { 
-            font-size: 13px; /* Increased from 10px */
-            line-height: 1.6; 
-            color: #444; 
-            margin: 0; 
-            font-family: monospace; 
-        }
+        .card h3 { font-size: 18px; margin: 0 0 15px 0; text-transform: uppercase; color: #000; line-height: 1.4; }
+        .card p { font-size: 14px; line-height: 1.6; color: #444; margin: 0; font-family: monospace; }
         
         .card.common { border-color: #6c757d; }
         .card.uncommon { border-color: #007bff; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
@@ -248,7 +353,7 @@
             </br>
             <div class="parent-container">
                 <div class="image-container">
-                    <img src="./images/new_dog_dev.png" alt="Doggo fixing computer issues" width="300" height="200">
+                    <img src="./images/new_dog_dev.png" alt="Doggo fixing computer issues" width="300" height="200" title="Click to pet me!">
                 </div>
                 <div class="text-container">
                     <a href="mailto:paularobleslopez@gmail.com">📩 paularobleslopez@gmail.com</a> <br/>
@@ -257,6 +362,13 @@
             </div>
         </section>
     </main>
+    
+    <!-- NEW: SUBTLE HINT TO SCROLL -->
+    <!-- Swapped ▼ for ☟ (Hand) so it looks like a pointer, not a button -->
+    <div class="hint-container" title="Are you sure?">
+        <div class="hint-arrow">☟</div>
+        <div class="hint-text">(nothing to see beloW)</div>
+    </div>
 
     <!-- THE OMINOUS PRELUDE (Scroll Down Messages) -->
     <div class="prelude-spacer">
@@ -321,6 +433,88 @@
     </div>
 
     <script>
+        /* --- 0. EASTER EGGS --- */
+        
+        // A. Title Changer
+        let docTitle = document.title;
+        window.addEventListener("blur", () => { document.title = "wait, come back!"; });
+        window.addEventListener("focus", () => { document.title = docTitle; });
+
+        // B. Console Secret
+        console.log("%c🕵️‍♀️ Find something cool?", "color: #ff4d4d; font-family: monospace; font-size: 20px; font-weight: bold;");
+        console.log("%cI dropped my coins here... try typing findCoins() and pressing ENTER to pick them up!", "color: #555; font-size: 12px; font-family: monospace;");
+
+        // Global function for the console user to find
+        window.findCoins = function() {
+            console.log("%c🪙 CHA-CHING! +100XP", "color: orange; font-weight: bold; font-size: 16px;");
+            
+            // Visual Coin Shower
+            for(let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const coin = document.createElement('div');
+                    coin.innerText = "🪙";
+                    coin.className = "secret-coin"; 
+                    coin.style.left = (Math.random() * 80 + 10) + "vw"; 
+                    document.body.appendChild(coin);
+                    
+                    setTimeout(() => coin.remove(), 1200);
+                }, i * 100);
+            }
+            return "You found them!";
+        };
+
+        // C. Pet The Dog Logic
+        const dogImg = document.querySelector('.image-container img');
+        if(dogImg) {
+            dogImg.addEventListener('click', (e) => {
+                const bubble = document.createElement('div');
+                bubble.className = 'bark-bubble';
+                bubble.innerText = "WOOF!";
+                bubble.style.position = 'absolute';
+                bubble.style.left = (e.pageX - 35) + 'px'; 
+                bubble.style.top = (e.pageY - 60) + 'px';
+                document.body.appendChild(bubble);
+                setTimeout(() => bubble.remove(), 1000);
+            });
+        }
+
+        // D. Konami Code
+        const konamiCode = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+        let kPos = 0;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[kPos]) {
+                kPos++;
+                if (kPos === konamiCode.length) {
+                    activatePartyMode();
+                    kPos = 0;
+                }
+            } else {
+                kPos = 0;
+            }
+        });
+
+        function activatePartyMode() {
+            alert("🎈 SECRET PARTY MODE ACTIVATED! 🎈");
+            document.body.style.transition = "background-color 0.5s";
+            const oldBg = document.body.style.backgroundColor;
+            document.body.style.backgroundColor = "#e6ffe6"; 
+            setTimeout(() => { document.body.style.backgroundColor = oldBg; }, 3000);
+
+            const emojis = ['🎈', '🐍', '💾', '🎉', '👾', '☁️', '🎂'];
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                particle.className = 'party-particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                const duration = Math.random() * 2 + 3; 
+                particle.style.animationDuration = duration + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(particle);
+                setTimeout(() => { particle.remove(); }, (duration + 2) * 1000);
+            }
+        }
+
+
         /* --- 1. SCROLL ANIMATION OBSERVER --- */
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -340,20 +534,15 @@
             { name: "Python Pro", rarity: "common", emoji: "🐍", desc: "Writes clean, scalable scripts to automate the boring stuff." },
             { name: "SQL Sage", rarity: "common", emoji: "💾", desc: "Can query databases faster than you can say 'SELECT *'." },
             { name: "GCP Scholar", rarity: "common", emoji: "☁️", desc: "Currently leveling up: Studying for the Google Cloud Data Engineer Certificate." },
-            { name: "On Repeat", rarity: "common", emoji: "🎧", desc: "Current obsession: 'Birds of a Feather' by Billie Eilish." },
-            
-            // UNCOMMON: Interests
+            { name: "On Repeat", rarity: "common", emoji: "🎧", desc: "Current obsession: 'HIT ME HARD AND SOFT' album by Billie Eilish." },
             { name: "Market Watcher", rarity: "uncommon", emoji: "📈", desc: "Lately obsessed with economics, investing, and analyzing market trends." },
             { name: "Korean Foodie", rarity: "uncommon", emoji: "🥢", desc: "Powered by Kimchi and Bibimbap. Always looking for the best spicy food." },
             { name: "Style Scout", rarity: "uncommon", emoji: "🕶️", desc: "Always trying to keep up with the latest trends in fashion and culture." },
-            { name: "Afterwork Hunter", rarity: "uncommon", emoji: "🍻", desc: "Laptop closed. Code pushed. Time to find the sunniest terrace for a tintito de verano." },
             { name: "Seoul Wanderer", rarity: "uncommon", emoji: "🇰🇷", desc: "Recently explored Korea. Still dreaming about street markets, temples, and spicy food adventures." },
             { name: "Future Japan Explorer", rarity: "rare", emoji: "🇯🇵", desc: "Next dream destination: Japan. Cherry blossoms, anime merch, and ramen quests are loading..." },
-            
-            // RARE: Meta / Fun
             { name: "Card Collector", rarity: "rare", emoji: "🃏", desc: "Loves collecting Pokémon cards. (Wait, is this a card inside a card game?)" },
             { name: "Shiny Hunter", rarity: "rare", emoji: "✨", desc: "An easter egg within an easter egg. You found the rarest card!" },
-            { name: "Southern Roots", rarity: "rare", emoji: "💃", desc: "Born & raised in Granada, now based in Madrid. Bringing Andalusian vibes (and the accent) to the capital." }
+            { name: "Southern Roots", rarity: "rare", emoji: "💃", desc: "Born & raised in Granada, now based in Madrid. Bringing Andalusian accent to the capital." }
         ]; 
 
         /* --- 3. GAME LOGIC --- */
@@ -362,8 +551,6 @@
         const pack = document.getElementById('pack');
         const cardDisplay = document.getElementById('card-display');
         const controls = document.getElementById('game-controls');
-
-        // NEW: "Deck" System
         let availableIndices = [];
 
         if(trigger) {
@@ -373,13 +560,16 @@
         }
 
         function launchGame() {
-            overlay.style.display = 'flex';
-            resetDeck(); // Shuffle the deck when opening the game
+            resetDeck();
             resetGame();
+            overlay.classList.add('crt-active'); 
+            pack.classList.remove('pack-appear');
+            void pack.offsetWidth; 
+            pack.classList.add('pack-appear');
         }
 
         function closeGame() {
-            overlay.style.display = 'none';
+            overlay.classList.remove('crt-active');
         }
 
         function resetGame() {
@@ -389,26 +579,15 @@
             pack.classList.remove('shake');
         }
 
-        // --- DECK LOGIC ---
-        
         function resetDeck() {
-            // Refill the array with numbers [0, 1, 2, ... up to cards.length]
             availableIndices = cards.map((_, index) => index);
         }
 
         function getRandomCard() {
-            // 1. If the deck is empty, reshuffle!
-            if (availableIndices.length === 0) {
-                resetDeck();
-            }
-
-            // 2. Pick a random index from the *available* pool
+            if (availableIndices.length === 0) resetDeck();
             const randomIndex = Math.floor(Math.random() * availableIndices.length);
             const cardIndex = availableIndices[randomIndex];
-
-            // 3. Remove that number from the pool so it can't be picked again
             availableIndices.splice(randomIndex, 1);
-
             return cards[cardIndex];
         }
 
@@ -428,7 +607,6 @@
                 pack.style.display = 'none';
                 cardDisplay.style.display = 'flex';
                 controls.style.display = 'flex';
-                
                 cardDisplay.style.animation = 'none';
                 cardDisplay.offsetHeight; 
                 cardDisplay.style.animation = 'popIn 0.6s ease-out';
