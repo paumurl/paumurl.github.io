@@ -695,18 +695,23 @@
 
     /* --- 2. GAME DATA & LOGIC --- */
     const cards = [
-        { name: "Python Pro", rarity: "common", emoji: "🐍", desc: "Writes clean, scalable scripts to automate the boring stuff." },
-        { name: "SQL Sage", rarity: "common", emoji: "💾", desc: "Can query databases faster than you can say 'SELECT *'." },
-        { name: "GCP Scholar", rarity: "common", emoji: "☁️", desc: "Currently leveling up: Studying for the Google Cloud Data Engineer Certificate." },
-        { name: "On Repeat", rarity: "common", emoji: "🎧", desc: "Current obsession: 'HIT ME HARD AND SOFT' album by Billie Eilish." },
-        { name: "Market Watcher", rarity: "uncommon", emoji: "📈", desc: "Lately obsessed with economics, investing, and analyzing market trends." },
-        { name: "Korean Foodie", rarity: "uncommon", emoji: "🥢", desc: "Powered by Kimchi and Bibimbap. Always looking for the best spicy food." },
-        { name: "Style Scout", rarity: "uncommon", emoji: "🕶️", desc: "Always trying to keep up with the latest trends in fashion and culture." },
-        { name: "Seoul Wanderer", rarity: "uncommon", emoji: "🇰🇷", desc: "Recently explored Korea. Still dreaming about street markets, temples, and spicy food adventures." },
-        { name: "Future Japan Explorer", rarity: "rare", emoji: "🇯🇵", desc: "Next dream destination: Japan. Cherry blossoms, anime merch, and ramen quests are loading..." },
-        { name: "Card Collector", rarity: "rare", emoji: "🃏", desc: "Loves collecting Pokémon cards. (Wait, is this a card inside a card game?)" },
-        { name: "Shiny Hunter", rarity: "rare", emoji: "✨", desc: "An easter egg within an easter egg. You found the rarest card!" },
-        { name: "Southern Roots", rarity: "rare", emoji: "💃", desc: "Born & raised in Granada, now based in Madrid. Bringing Andalusian accent to the capital." }
+            { name: "Python Pro", rarity: "common", emoji: "🐍", desc: "Writes clean, scalable scripts to automate the boring stuff." },
+            { name: "SQL Sage", rarity: "common", emoji: "💾", desc: "Can query databases faster than you can say 'SELECT *'." },
+            { name: "GCP Scholar", rarity: "common", emoji: "☁️", desc: "Currently leveling up: Studying for the Google Cloud Data Engineer Certificate." },
+            { name: "On Repeat", rarity: "common", emoji: "🎧", desc: "Current obsession: 'Birds of a Feather' by Billie Eilish." },
+            
+            // UNCOMMON: Interests
+            { name: "Market Watcher", rarity: "uncommon", emoji: "📈", desc: "Lately obsessed with economics, investing, and analyzing market trends." },
+            { name: "Korean Foodie", rarity: "uncommon", emoji: "🥢", desc: "Powered by Kimchi and Bibimbap. Always looking for the best spicy food." },
+            { name: "Style Scout", rarity: "uncommon", emoji: "🕶️", desc: "Always trying to keep up with the latest trends in fashion and culture." },
+            { name: "Afterwork Hunter", rarity: "uncommon", emoji: "🍻", desc: "Laptop closed. Code pushed. Time to find the sunniest terrace for a tintito de verano." },
+            { name: "Seoul Wanderer", rarity: "uncommon", emoji: "🇰🇷", desc: "Recently explored Korea. Still dreaming about street markets, temples, and spicy food adventures." },
+            { name: "Future Japan Explorer", rarity: "rare", emoji: "🇯🇵", desc: "Next dream destination: Japan. Cherry blossoms, anime merch, and ramen quests are loading..." },
+            
+            // RARE: Meta / Fun
+            { name: "Card Collector", rarity: "rare", emoji: "🃏", desc: "Loves collecting Pokémon cards. (Wait, is this a card inside a card game?)" },
+            { name: "Shiny Hunter", rarity: "rare", emoji: "✨", desc: "An easter egg within an easter egg. You found the rarest card!" },
+            { name: "Southern Roots", rarity: "rare", emoji: "💃", desc: "Born & raised in Granada, now based in Madrid. Bringing Andalusian vibes (and the accent) to the capital." }
     ]; 
 
     /* --- 3. GAME LOGIC --- */
