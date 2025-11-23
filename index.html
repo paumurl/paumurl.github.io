@@ -331,7 +331,7 @@
             100% { transform: translateX(-50%); } 
         }
 
-        /* --- FOOTER TRIGGERS (UPDATED) --- */
+        /* --- FOOTER TRIGGERS --- */
         footer { 
             text-align: center; 
             padding: 70px 0 100px; 
@@ -348,11 +348,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 40px; /* Space between egg and red button */
+            gap: 30px;
             flex-wrap: wrap;
         }
         
-        /* SHARED STYLES FOR EGG & RED BUTTON */
         .trigger-item {
             cursor: pointer; 
             display: inline-block; 
@@ -373,13 +372,22 @@
             border-color: red; 
         }
 
-        /* RED BUTTON (DANGER) STYLES */
+        /* RED BUTTON STYLES */
         #danger-trigger { border: 4px dashed #000; }
         #danger-trigger:hover {
             background-color: #ffe6e6;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
             animation: danger-shake 0.5s infinite;
             border-color: black;
+        }
+
+        /* TERMINAL BUTTON STYLES (NEW) */
+        #terminal-trigger { border: 4px dashed #00ff00; }
+        #terminal-trigger:hover {
+            background-color: #e6ffe6;
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.5);
+            border-color: #008000;
+            transform: translateY(-5px);
         }
 
         @keyframes egg-wiggle {
@@ -399,8 +407,9 @@
             75% { transform: translate(-2px, -2px) rotate(-1deg); }
         }
 
-        .warning-text { font-family: 'Press Start 2P', cursive; color: #ff0000; font-size: 10px; margin-bottom: 10px; animation: blink 0.8s infinite; }
-        .pixel-egg { font-size: 50px; display: block; }
+        .warning-text { font-family: 'Press Start 2P', cursive; color: #000; font-size: 10px; margin-bottom: 10px; }
+        #danger-trigger .warning-text { color: #ff0000; animation: blink 0.8s infinite; }
+        .pixel-egg { font-size: 40px; display: block; }
 
         /* --- BSOD STYLE --- */
         #bsod {
@@ -428,6 +437,75 @@
             width: 100%;
             max-width: 800px;
         }
+
+        /* --- TERMINAL OVERLAY STYLE (NEW) --- */
+        #terminal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .terminal-window {
+            width: 600px;
+            height: 400px;
+            background-color: #0c0c0c;
+            border: 2px solid #333;
+            box-shadow: 10px 10px 0 #000;
+            display: flex;
+            flex-direction: column;
+            max-width: 90vw;
+        }
+
+        .terminal-header {
+            background: #333;
+            color: #fff;
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-family: sans-serif;
+            user-select: none;
+        }
+        .close-terminal { cursor: pointer; font-weight: bold; }
+        .close-terminal:hover { color: #ff4d4d; }
+
+        .terminal-body {
+            flex-grow: 1;
+            padding: 15px;
+            color: #00ff00;
+            overflow-y: auto;
+            font-size: 14px;
+            scrollbar-width: thin;
+            scrollbar-color: #00ff00 #000;
+        }
+
+        .input-line {
+            display: flex;
+            padding: 10px 15px;
+            background: #111;
+            border-top: 1px solid #333;
+        }
+
+        .prompt { color: #00ff00; margin-right: 10px; }
+
+        #terminal-input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'Space Mono', monospace;
+            flex-grow: 1;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .cmd-highlight { color: #fff; font-weight: bold; }
+        .response-line { margin-bottom: 5px; opacity: 0.9; }
 
         /* --- GAME OVERLAY STYLES & TRANSITION --- */
         #game-overlay {
@@ -513,7 +591,7 @@
         .card.uncommon { border-color: #007bff; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
         .card.rare { border-color: #ffd700; background: linear-gradient(135deg, #fff 0%, #fff9e6 100%); box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
 
-        /* LEGENDARY CARD STYLE (Holographic) */
+        /* LEGENDARY CARD STYLE */
         .card.legendary {
             border-color: #9d00ff;
             background: linear-gradient(135deg, #fff 0%, #f3e5f5 100%);
@@ -528,14 +606,6 @@
             position: absolute;
             top: -50%; left: -50%;
             width: 200%; height: 200%;
-            /* background: linear-gradient(
-                45deg, 
-                transparent 40%, 
-                rgba(255, 255, 255, 0.6) 45%, 
-                rgba(255, 255, 255, 0.8) 50%, 
-                rgba(255, 255, 255, 0.6) 55%, 
-                transparent 60%
-            ); */
             transform: rotate(30deg);
             animation: holographic-sweep 3s infinite linear;
             pointer-events: none;
@@ -687,19 +757,24 @@
 
 <footer>
     <div class="footer-triggers">
+         <!-- 2. THE TERMINAL -->
+        <div id="terminal-trigger" class="trigger-item" title="System Access">
+            <div class="warning-text">CMD</div>
+            <div class="pixel-egg">💾</div>
+        </div>
 
-        <!-- THE RED BUTTON (BSOD) -->
+        <!-- 1. THE RED BUTTON (BSOD) -->
         <div id="danger-trigger" class="trigger-item" title="DEFINITELY NOT.">
             <div class="warning-text">NO!</div>
             <div class="pixel-egg">🔴</div>
         </div>
-        <!-- THE EGG (Game) -->
+
+
+        <!-- 3. THE EGG (Game) -->
         <div id="egg-trigger" class="trigger-item" title="Nothing to see here...">
             <div class="warning-text">OPEN?</div>
             <div class="pixel-egg">🥚</div>
         </div>
-
-
     </div>
 </footer>
 
@@ -710,6 +785,25 @@
     <p style="font-size: 14px; margin-top: 20px;">For more information about this issue and possible fixes, visit https://www.linkedin.com/in/paula-robles-lopez/</p>
     <p style="font-size: 14px; margin-top: 30px;">Stop code: ACTION_NOT_ALLOWED</p>
     <p style="font-size: 12px; margin-top: 50px; opacity: 0.7;">(Click anywhere to restart)</p>
+</div>
+
+<!-- TERMINAL OVERLAY (NEW) -->
+<div id="terminal-overlay">
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <span>root@paula-web:~</span>
+            <span class="close-terminal" onclick="closeTerminal()">[X]</span>
+        </div>
+        <div class="terminal-body" id="terminal-output">
+            <div>Welcome to PaulaOS v2.5</div>
+            <div>Type <span class="cmd-highlight">'help'</span> to see available commands.</div>
+            <br>
+        </div>
+        <div class="input-line">
+            <span class="prompt">root@paula:~$</span>
+            <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+        </div>
+    </div>
 </div>
 
 <!-- EASTER EGG GAME OVERLAY -->
@@ -768,6 +862,92 @@
         dangerTrigger.addEventListener('click', () => {
             bsod.style.display = 'flex';
         });
+    }
+
+    /* --- TERMINAL LOGIC (NEW) --- */
+    const termTrigger = document.getElementById('terminal-trigger');
+    const termOverlay = document.getElementById('terminal-overlay');
+    const termInput = document.getElementById('terminal-input');
+    const termOutput = document.getElementById('terminal-output');
+
+    // Open Terminal
+    if(termTrigger) {
+        termTrigger.addEventListener('click', () => {
+            termOverlay.style.display = 'flex';
+            termInput.value = '';
+            termInput.focus();
+        });
+    }
+
+    // Close Terminal
+    function closeTerminal() {
+        termOverlay.style.display = 'none';
+    }
+
+    // Handle Commands
+    if(termInput) {
+        termInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const command = this.value.trim().toLowerCase();
+                
+                // Add input line to history
+                addToTerminal(`root@paula:~$ ${this.value}`, '#fff');
+                
+                // Process command
+                processCommand(command);
+                
+                // Reset input and scroll
+                this.value = '';
+                termOutput.scrollTop = termOutput.scrollHeight;
+            }
+        });
+    }
+
+    function addToTerminal(text, color = '#00ff00') {
+        const div = document.createElement('div');
+        div.style.color = color;
+        div.className = 'response-line';
+        div.innerHTML = text; // innerHTML to allow styling
+        termOutput.appendChild(div);
+    }
+
+    function processCommand(cmd) {
+        switch(cmd) {
+            case 'help':
+                addToTerminal("AVAILABLE COMMANDS:");
+                addToTerminal("- whoami : Who is Paula?");
+                addToTerminal("- stack  : View tech stack details");
+                addToTerminal("- contact: Get email address");
+                addToTerminal("- sudo hire: Critical action");
+                addToTerminal("- clear  : Clear screen");
+                break;
+            case 'whoami':
+                addToTerminal("Paula Robles López. Data Scientist. Dog enthusiast. Based in Madrid.");
+                break;
+            case 'contact':
+                addToTerminal("Email: paularobleslopez@gmail.com");
+                addToTerminal("<a href='https://www.linkedin.com/in/paula-robles-lopez/' target='_blank' style='color:#fff'>Open LinkedIn >></a>");
+                break;
+            case 'stack':
+                addToTerminal("CORE: Python, SQL");
+                addToTerminal("INFRA: Docker, Kubernetes, GCP");
+                addToTerminal("ORCHESTRATION: Airflow");
+                break;
+            case 'sudo hire':
+            case 'hire':
+                addToTerminal("Running hire_paula.exe...", "yellow");
+                setTimeout(() => addToTerminal("SUCCESS! Great decision.", "cyan"), 600);
+                setTimeout(() => addToTerminal("Please send an email to finalize.", "cyan"), 1200);
+                break;
+            case 'clear':
+                termOutput.innerHTML = '';
+                break;
+            case 'ls':
+                addToTerminal("secret_web.html  resume.pdf  dog_pics/  coins.db");
+                break;
+            default:
+                addToTerminal(`Command not found: ${cmd}. Type 'help'.`, '#ff4d4d');
+        }
     }
 
     /* --- 0. EASTER EGGS --- */
@@ -878,7 +1058,7 @@
     ];
 
     /* --- 3. GAME LOGIC --- */
-    const eggTrigger = document.getElementById('egg-trigger'); // Updated selector
+    const eggTrigger = document.getElementById('egg-trigger');
     const overlay = document.getElementById('game-overlay');
     const pack = document.getElementById('pack');
     const cardDisplay = document.getElementById('card-display');
