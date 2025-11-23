@@ -440,6 +440,19 @@
         .card.uncommon { border-color: #007bff; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
         .card.rare { border-color: #ffd700; background: linear-gradient(135deg, #fff 0%, #fff9e6 100%); box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
 
+        /* LEGENDARY CARD STYLE */
+        .card.legendary {
+            border-color: #9d00ff;
+            background: linear-gradient(135deg, #fff 0%, #f3e5f5 100%);
+            box-shadow: 0 0 50px rgba(157, 0, 255, 0.6);
+            animation: legendary-pulse 2s infinite alternate;
+        }
+        
+        @keyframes legendary-pulse {
+            0% { box-shadow: 0 0 30px rgba(157, 0, 255, 0.5); transform: scale(1); }
+            100% { box-shadow: 0 0 60px rgba(157, 0, 255, 0.8), 0 0 20px #fff; transform: scale(1.01); }
+        }
+
         .pixel-btn {
             margin-top: 20px;
             background: #fff; border: 4px solid #fff;
@@ -696,24 +709,113 @@
 
     /* --- 2. GAME DATA & LOGIC --- */
     const cards = [
-            { name: "Python Pro", rarity: "common", emoji: "🐍", desc: "Writes clean, scalable scripts to automate the boring stuff." },
-            { name: "SQL Sage", rarity: "common", emoji: "💾", desc: "Can query databases faster than you can say 'SELECT *'." },
-            { name: "GCP Scholar", rarity: "common", emoji: "☁️", desc: "Currently leveling up: Studying for the Google Cloud Data Engineer Certificate." },
-            { name: "On Repeat", rarity: "common", emoji: "🎧", desc: "Current obsession: 'Birds of a Feather' by Billie Eilish." },
-            
-            // UNCOMMON: Interests
-            { name: "Market Watcher", rarity: "uncommon", emoji: "📈", desc: "Lately obsessed with economics, investing, and analyzing market trends." },
-            { name: "Korean Foodie", rarity: "uncommon", emoji: "🥢", desc: "Powered by Kimchi and Bibimbap. Always looking for the best spicy food." },
-            { name: "Style Scout", rarity: "uncommon", emoji: "🕶️", desc: "Always trying to keep up with the latest trends in fashion and culture." },
-            { name: "Afterwork Hunter", rarity: "uncommon", emoji: "🍻", desc: "Laptop closed. Code pushed. Time to find the sunniest terrace for a tintito de verano." },
-            { name: "Seoul Wanderer", rarity: "uncommon", emoji: "🇰🇷", desc: "Recently explored Korea. Still dreaming about street markets, temples, and spicy food adventures." },
-            { name: "Future Japan Explorer", rarity: "rare", emoji: "🇯🇵", desc: "Next dream destination: Japan. Cherry blossoms, anime merch, and ramen quests are loading..." },
-            
-            // RARE: Meta / Fun
-            { name: "Card Collector", rarity: "rare", emoji: "🃏", desc: "Loves collecting Pokémon cards. (Wait, is this a card inside a card game?)" },
-            { name: "Shiny Hunter", rarity: "rare", emoji: "✨", desc: "An easter egg within an easter egg. You found the rarest card!" },
-            { name: "Southern Roots", rarity: "rare", emoji: "💃", desc: "Born & raised in Granada, now based in Madrid. Bringing Andalusian vibes (and the accent) to the capital." }
-    ]; 
+        // ==============================================
+        // COMMON: THE BASE
+        // ==============================================
+        { 
+            name: "Python Pro", 
+            rarity: "common", 
+            emoji: "🐍", 
+            desc: "Writes clear, scalable scripts that handle anything too repetitive for humans." 
+        },
+        { 
+            name: "SQL Witch", 
+            rarity: "common", 
+            emoji: "💾", 
+            desc: "Understands databases inside out. Knows how to get the right data without overthinking it." 
+        },
+        { 
+            name: "Endpoint Ninja", 
+            rarity: "common", 
+            emoji: "🔌", 
+            desc: "Builds dependable API endpoints that respond fast and stay stable under pressure." 
+        },
+        { 
+            name: "Southern Roots", 
+            rarity: "common", 
+            emoji: "💃", 
+            desc: "Born and raised in Granada. Bringing Andalusian accent to the capital." 
+        },
+
+        // ==============================================
+        // UNCOMMON: THE HEAVY AND FUN STUFF
+        // ==============================================
+        { 
+            name: "DAG Director", 
+            rarity: "uncommon", 
+            emoji: "🌬️", 
+            desc: "Keeps Airflow data pipelines running smoothly, from raw input to clean output." 
+        },
+        { 
+            name: "Pipeline Pilot", 
+            rarity: "uncommon", 
+            emoji: "🚀", 
+            desc: "Master of CI/CD. Uses CircleCI and Argo CD to turn 'git push' into zero-downtime production deployments." 
+        },
+        { 
+            name: "Kube Commander", 
+            rarity: "uncommon", 
+            emoji: "☸️", 
+            desc: "Runs Kubernetes on GCP with a steady hand. Keeps services healthy even when everything else misbehaves." 
+        },
+        { 
+            name: "GCP Scholar", 
+            rarity: "uncommon", 
+            emoji: "☁️", 
+            desc: "Currently leveling up: Studying for the Google Cloud Data Engineer Certificate." 
+        },
+        { 
+            name: "Market Watcher", 
+            rarity: "uncommon", 
+            emoji: "📈", 
+            desc: "Applies data logic to the real world. Obsessed with economics, trends, and what the numbers actually mean." 
+        },
+        { 
+            name: "Lingua Arcana", 
+            rarity: "uncommon", 
+            emoji: "🗣️", 
+            desc: "Master’s in Data Science in English, Cambridge C1 certified. Explains tech stuff to anyone, anywhere." 
+        },
+
+        // ==============================================
+        // RARE: THE HIGH LEVEL PROJECTS AND THE FUN FACTS
+        // ==============================================
+        { 
+            name: "Agent Alchemist", 
+            rarity: "rare", 
+            emoji: "🤖", 
+            desc: "Creates AI agents that solve problems without micromanagement." 
+        },
+        { 
+            name: "Engagement Architect", 
+            rarity: "rare", 
+            emoji: "🧠", 
+            desc: "Builds scalable data + AI systems that support real-world decisions and user interactions." 
+        },
+        {
+            name: "Card Collector", 
+            rarity: "rare", 
+            emoji: "🃏", 
+            desc: "Loves collecting Pokémon cards. (Wait, is this a card inside a card game?)" 
+        },
+        { 
+            name: "Afterwork Hunter", 
+            rarity: "rare", 
+            emoji: "🍻", 
+            desc: "Laptop closed. Code pushed. Time to find the sunniest terrace for a tintito de verano." 
+        },
+
+        // ==============================================
+        // LEGENDARY: THE ULTIMATE SKILLS
+        // ==============================================
+        { 
+            name: "I'll Figure It Out", 
+            rarity: "legendary", 
+            emoji: "🛠️", 
+            desc: "Doesn’t know it yet? Give it a minute. Already got it covered." 
+        }
+
+    ];
 
     /* --- 3. GAME LOGIC --- */
     const trigger = document.getElementById('egg-trigger');
