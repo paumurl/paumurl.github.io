@@ -79,7 +79,7 @@
             background: #000;
             padding: 5px 10px;
             transform: rotate(-1deg);
-            min-height: 38px; /* Prevents jumping */
+            min-height: 38px;
             box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
         }
 
@@ -133,6 +133,28 @@
         /* --- MAIN CONTENT --- */
         .intro-text { font-size: 1.1rem; margin-bottom: 25px; }
         .highlight { background: rgba(255, 77, 77, 0.1); border-bottom: 2px solid var(--primary-red); font-weight: bold; }
+
+        /* TECH STACK BADGES (NEW) */
+        .tech-stack-container {
+            margin: 20px 0 30px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .tech-badge {
+            font-size: 0.7rem;
+            background: #000;
+            color: #fff;
+            padding: 6px 10px;
+            font-family: 'Press Start 2P', cursive;
+            box-shadow: 3px 3px 0 var(--primary-red);
+            transition: transform 0.1s;
+            cursor: default;
+        }
+        
+        .tech-badge:hover { transform: translateY(-3px); }
 
         /* --- CONTACT SECTION --- */
         .contact-section {
@@ -208,7 +230,6 @@
             opacity: 0.8;
         }
 
-
         /* --- ANIMATIONS & FX --- */
         .bark-bubble {
             font-family: 'Press Start 2P', cursive;
@@ -248,7 +269,7 @@
         .secret-coin { position: fixed; bottom: -50px; font-size: 60px; z-index: 99999; pointer-events: none; animation: coinJump 1.2s ease-out forwards; filter: drop-shadow(4px 4px 0 #000); }
         @keyframes coinJump { 0% { transform: translateY(0) rotateY(0deg); opacity: 1; } 50% { transform: translateY(-60vh) rotateY(180deg); opacity: 1; } 100% { transform: translateY(-65vh) rotateY(360deg); opacity: 0; } }
 
-        .hint-container { text-align: center; margin-top: 40px; padding-bottom: 20px; opacity: 0.6; animation: bounce 2s infinite; cursor: help; transition: opacity 0.3s; }
+        .hint-container { text-align: center; margin-top: 40px; padding-bottom: 20px; opacity: 0.6; animation: bounce 2s infinite; cursor: pointer; transition: opacity 0.3s; }
         .hint-container:hover { opacity: 1; }
         .hint-arrow { font-size: 40px; color: var(--primary-red); line-height: 1; }
         .hint-text { font-family: 'Press Start 2P', cursive; font-size: 10px; color: #999; margin-top: 10px; text-transform: uppercase; }
@@ -288,6 +309,7 @@
         /* --- POLICE LINE --- */
         .marquee-container {
             width: 100%;
+            max-width: 100vw; /* Fixes mobile overflow */
             background: #ffd700;
             border-top: 3px solid #000;
             border-bottom: 3px solid #000;
@@ -303,12 +325,12 @@
 
         .marquee-content {
             display: inline-block;
-            animation: marquee 35s linear infinite; /* SLOW MOTION */
+            animation: marquee 35s linear infinite; 
         }
 
         .marquee-item {
             display: inline-block;
-            margin-right: 150px; /* HUGE GAP */
+            margin-right: 150px;
         }
 
         @keyframes marquee {
@@ -321,11 +343,7 @@
             text-align: center; 
             padding: 70px 0 100px; 
             background-color: #fff0f0; 
-            
-            /* Solid red border */
             border-top: 5px solid #ff4d4d;
-
-            /* CHECKERED PATTERN */
             background-image:
                 linear-gradient(45deg, #ffcccc 25%, transparent 25%, transparent 75%, #ffcccc 75%, #ffcccc),
                 linear-gradient(45deg, #ffcccc 25%, transparent 25%, transparent 75%, #ffcccc 75%, #ffcccc);
@@ -364,7 +382,6 @@
 
         .warning-text { font-family: 'Press Start 2P', cursive; color: #ff0000; font-size: 12px; margin-bottom: 10px; animation: blink 0.8s infinite; }
         .pixel-egg { font-size: 50px; display: block; }
-        @keyframes blink { 50% { opacity: 0; } }
 
         /* --- GAME OVERLAY STYLES & TRANSITION --- */
         #game-overlay {
@@ -395,6 +412,17 @@
             100% { transform: scaleX(1) scaleY(1); opacity: 1; }
         }
 
+        /* NEW: CRT Turn Off Animation */
+        #game-overlay.crt-turn-off {
+            animation: crtTurnOff 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes crtTurnOff {
+            0% { transform: scale(1, 1); opacity: 1; }
+            40% { transform: scale(1, 0.005); opacity: 1; }
+            100% { transform: scale(0, 0); opacity: 0; }
+        }
+
         /* --- FIXED PACK STYLES --- */
         #pack {
             width: 220px; height: 320px;
@@ -413,7 +441,7 @@
 
         .card {
             display: none;
-            width: 300px; height: 460px; /* LARGER CARD SIZE */
+            width: 300px; height: 460px;
             background: #f4f4f4;
             border: 6px solid #222;
             border-radius: 10px;
@@ -440,12 +468,39 @@
         .card.uncommon { border-color: #007bff; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
         .card.rare { border-color: #ffd700; background: linear-gradient(135deg, #fff 0%, #fff9e6 100%); box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
 
-        /* LEGENDARY CARD STYLE */
+        /* LEGENDARY CARD STYLE (UPDATED: Holographic) */
         .card.legendary {
             border-color: #9d00ff;
             background: linear-gradient(135deg, #fff 0%, #f3e5f5 100%);
             box-shadow: 0 0 50px rgba(157, 0, 255, 0.6);
             animation: legendary-pulse 2s infinite alternate;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Holographic sheen */
+        .card.legendary::before {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(
+                45deg, 
+                transparent 40%, 
+                rgba(255, 255, 255, 0.6) 45%, 
+                rgba(255, 255, 255, 0.8) 50%, 
+                rgba(255, 255, 255, 0.6) 55%, 
+                transparent 60%
+            );
+            transform: rotate(30deg);
+            animation: holographic-sweep 3s infinite linear;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        @keyframes holographic-sweep {
+            0% { transform: translate(-30%, -30%) rotate(30deg); }
+            100% { transform: translate(20%, 20%) rotate(30deg); }
         }
         
         @keyframes legendary-pulse {
@@ -462,7 +517,7 @@
             box-shadow: 4px 4px 0px #000;
         }
         .pixel-btn:active { transform: translate(4px, 4px); box-shadow: none; }
-        .close-overlay { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; font-family: sans-serif; }
+        .close-overlay { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; font-family: sans-serif; z-index: 10; }
 
         @keyframes shake { 10%, 90% { transform: translate3d(-2px, 0, 0); } 20%, 80% { transform: translate3d(4px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-8px, 0, 0); } 40%, 60% { transform: translate3d(8px, 0, 0); } }
         @keyframes popIn { 0% { transform: scale(0) rotate(-10deg); opacity: 0; } 70% { transform: scale(1.1) rotate(2deg); } 100% { transform: scale(1) rotate(0deg); opacity: 1; } }
@@ -471,17 +526,10 @@
         @media (max-width: 600px) {
             h1 { font-size: 1.4rem; }
             .retro-container { padding: 25px 20px; }
-            /* Stack dog and text vertically on mobile */
             .contact-section { flex-direction: column; text-align: center; gap: 20px; }
             .text-container { text-align: center; }
             .nav-btn { padding: 8px 10px; font-size: 9px; }
-            
-            /* ADDED CODE HERE */
-            .scroll-msg {
-                margin-left: 32px;
-                margin-right: 32px;
-                width: auto;
-            }
+            .scroll-msg { margin-left: 32px; margin-right: 32px; width: auto; }
         }
 
     </style>
@@ -498,9 +546,10 @@
         
         <nav>
             <ul>
-                <li><a class="nav-btn" href="resume_PaulaRobles.pdf" target="_blank">Resumé</a></li>
-                <li><a class="nav-btn" href="https://github.com/paumurl" target="_blank">Projects</a></li>
-                <li><a class="nav-btn" href="https://www.linkedin.com/in/paula-robles-lopez/" target="_blank">LinkedIn</a></li>
+                <!-- Security Update: Added rel="noopener noreferrer" -->
+                <li><a class="nav-btn" href="resume_PaulaRobles.pdf" target="_blank" rel="noopener noreferrer">Resumé</a></li>
+                <li><a class="nav-btn" href="https://github.com/paumurl" target="_blank" rel="noopener noreferrer">Projects</a></li>
+                <li><a class="nav-btn" href="https://www.linkedin.com/in/paula-robles-lopez/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
             </ul>
         </nav>
     </header> 
@@ -513,6 +562,18 @@
             <p class="intro-text">
                 With over <strong>2 years</strong> of hands-on experience. My skillset covers <span class="highlight">Python</span>, <span class="highlight">SQL analytics</span>, <span class="highlight">DevOps</span> practices, and <span class="highlight">Cloud infrastructure</span>.
             </p>
+            
+            <!-- NEW: Tech Stack Badges for quick recruiter scanning -->
+            <div class="tech-stack-container">
+                <span class="tech-badge">PYTHON</span>
+                <span class="tech-badge">SQL</span>
+                <span class="tech-badge">DOCKER</span>
+                <span class="tech-badge">KUBERNETES</span>
+                <span class="tech-badge">GCP</span>
+                <span class="tech-badge">AIRFLOW</span>
+                <span class="tech-badge">GIT</span>
+            </div>
+
             <p style="font-size: 0.9rem; color: #666;">
                 🌠 Currently diving deeper into DevOps!
             </p>
@@ -533,7 +594,8 @@
         </div>
     </main>
     
-    <div class="hint-container" title="Are you sure?">
+    <!-- Updated: Hint container now triggers scroll -->
+    <div class="hint-container" title="Are you sure?" onclick="scrollToSecret()">
         <div class="hint-arrow">☟</div>
         <div class="hint-text">(nothing to see beloW)</div>
     </div>
@@ -622,13 +684,17 @@
         if (charIndex < textToType.length) {
             typeTextElement.innerHTML += textToType.charAt(charIndex);
             charIndex++;
-            setTimeout(typeWriter, 100); // Speed of typing
+            setTimeout(typeWriter, 100); 
         }
     }
     
-    // Start typing when page loads
     window.addEventListener('load', typeWriter);
 
+    /* --- NEW: SCROLL FUNCTION FOR HINT ARROW --- */
+    function scrollToSecret() {
+        const prelude = document.querySelector('.prelude-spacer');
+        prelude.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
     /* --- 0. EASTER EGGS --- */
     let docTitle = document.title;
@@ -716,112 +782,25 @@
 
     /* --- 2. GAME DATA & LOGIC --- */
     const cards = [
-        // ==============================================
-        // COMMON: THE BASE
-        // ==============================================
-        { 
-            name: "Python Pro", 
-            rarity: "common", 
-            emoji: "🐍", 
-            desc: "Writes clear, scalable scripts that handle anything too repetitive for humans." 
-        },
-        { 
-            name: "SQL Witch", 
-            rarity: "common", 
-            emoji: "💾", 
-            desc: "Understands databases inside out. Knows how to get the right data without overthinking it." 
-        },
-        { 
-            name: "Endpoint Ninja", 
-            rarity: "common", 
-            emoji: "🔌", 
-            desc: "Builds dependable API endpoints that respond fast and stay stable under pressure." 
-        },
-        { 
-            name: "Southern Roots", 
-            rarity: "common", 
-            emoji: "💃", 
-            desc: "Born and raised in Granada. Bringing Andalusian accent to the capital." 
-        },
-
-        // ==============================================
-        // UNCOMMON: THE HEAVY AND FUN STUFF
-        // ==============================================
-        { 
-            name: "DAG Director", 
-            rarity: "uncommon", 
-            emoji: "🌬️", 
-            desc: "Keeps Airflow data pipelines running smoothly, from raw input to clean output." 
-        },
-        { 
-            name: "Pipeline Pilot", 
-            rarity: "uncommon", 
-            emoji: "🚀", 
-            desc: "Master of CI/CD. Uses CircleCI and Argo CD to turn 'git push' into zero-downtime production deployments." 
-        },
-        { 
-            name: "Kube Commander", 
-            rarity: "uncommon", 
-            emoji: "☸️", 
-            desc: "Runs Kubernetes on GCP with a steady hand. Keeps services healthy even when everything else misbehaves." 
-        },
-        { 
-            name: "GCP Scholar", 
-            rarity: "uncommon", 
-            emoji: "☁️", 
-            desc: "Currently leveling up: Studying for the Google Cloud Data Engineer Certificate." 
-        },
-        { 
-            name: "Market Watcher", 
-            rarity: "uncommon", 
-            emoji: "📈", 
-            desc: "Applies data logic to the real world. Obsessed with economics, trends, and what the numbers actually mean." 
-        },
-        { 
-            name: "Lingua Arcana", 
-            rarity: "uncommon", 
-            emoji: "🗣️", 
-            desc: "Master’s in Data Science in English, Cambridge C1 certified. Explains tech stuff to anyone, anywhere." 
-        },
-
-        // ==============================================
-        // RARE: THE HIGH LEVEL PROJECTS AND THE FUN FACTS
-        // ==============================================
-        { 
-            name: "Agent Alchemist", 
-            rarity: "rare", 
-            emoji: "🤖", 
-            desc: "Creates AI agents that solve problems without micromanagement." 
-        },
-        { 
-            name: "Engagement Architect", 
-            rarity: "rare", 
-            emoji: "🧠", 
-            desc: "Builds scalable data + AI systems that support real-world decisions and user interactions." 
-        },
-        {
-            name: "Card Collector", 
-            rarity: "rare", 
-            emoji: "🃏", 
-            desc: "Loves collecting Pokémon cards. (Wait, is this a card inside a card game?)" 
-        },
-        { 
-            name: "Afterwork Hunter", 
-            rarity: "rare", 
-            emoji: "🍻", 
-            desc: "Laptop closed. Code pushed. Time to find the sunniest terrace for a tintito de verano." 
-        },
-
-        // ==============================================
-        // LEGENDARY: THE ULTIMATE SKILLS
-        // ==============================================
-        { 
-            name: "I'll Figure It Out", 
-            rarity: "legendary", 
-            emoji: "🛠️", 
-            desc: "Doesn’t know it yet? Give it a minute. Already got it covered." 
-        }
-
+        // COMMON
+        { name: "Python Pro", rarity: "common", emoji: "🐍", desc: "Writes clear, scalable scripts that handle anything too repetitive for humans." },
+        { name: "SQL Witch", rarity: "common", emoji: "💾", desc: "Understands databases inside out. Knows how to get the right data without overthinking it." },
+        { name: "Endpoint Ninja", rarity: "common", emoji: "🔌", desc: "Builds dependable API endpoints that respond fast and stay stable under pressure." },
+        { name: "Southern Roots", rarity: "common", emoji: "💃", desc: "Born and raised in Granada. Bringing Andalusian accent to the capital." },
+        // UNCOMMON
+        { name: "DAG Director", rarity: "uncommon", emoji: "🌬️", desc: "Keeps Airflow data pipelines running smoothly, from raw input to clean output." },
+        { name: "Pipeline Pilot", rarity: "uncommon", emoji: "🚀", desc: "Master of CI/CD. Uses CircleCI and Argo CD to turn 'git push' into zero-downtime production deployments." },
+        { name: "Kube Commander", rarity: "uncommon", emoji: "☸️", desc: "Runs Kubernetes on GCP with a steady hand. Keeps services healthy even when everything else misbehaves." },
+        { name: "GCP Scholar", rarity: "uncommon", emoji: "☁️", desc: "Currently leveling up: Studying for the Google Cloud Data Engineer Certificate." },
+        { name: "Market Watcher", rarity: "uncommon", emoji: "📈", desc: "Applies data logic to the real world. Obsessed with economics, trends, and what the numbers actually mean." },
+        { name: "Lingua Arcana", rarity: "uncommon", emoji: "🗣️", desc: "Master’s in Data Science in English, Cambridge C1 certified. Explains tech stuff to anyone, anywhere." },
+        // RARE
+        { name: "Agent Alchemist", rarity: "rare", emoji: "🤖", desc: "Creates AI agents that solve problems without micromanagement." },
+        { name: "Engagement Architect", rarity: "rare", emoji: "🧠", desc: "Builds scalable data + AI systems that support real-world decisions and user interactions." },
+        { name: "Card Collector", rarity: "rare", emoji: "🃏", desc: "Loves collecting Pokémon cards. (Wait, is this a card inside a card game?)" },
+        { name: "Afterwork Hunter", rarity: "rare", emoji: "🍻", desc: "Laptop closed. Code pushed. Time to find the sunniest terrace for a tintito de verano." },
+        // LEGENDARY
+        { name: "I'll Figure It Out", rarity: "legendary", emoji: "🛠️", desc: "Doesn’t know it yet? Give it a minute. Already got it covered." }
     ];
 
     /* --- 3. GAME LOGIC --- */
@@ -841,6 +820,7 @@
     function launchGame() {
         resetDeck();
         resetGame();
+        overlay.classList.remove('crt-turn-off'); // Ensure previous close anim is gone
         overlay.classList.add('crt-active'); 
         pack.classList.remove('pack-appear');
         void pack.offsetWidth; 
@@ -848,7 +828,15 @@
     }
 
     function closeGame() {
-        overlay.classList.remove('crt-active');
+        // Trigger CRT Turn Off Animation
+        overlay.classList.add('crt-turn-off');
+        
+        // Wait for animation to finish before hiding
+        setTimeout(() => {
+            overlay.classList.remove('crt-active');
+            overlay.classList.remove('crt-turn-off');
+            resetGame();
+        }, 400);
     }
 
     function resetGame() {
