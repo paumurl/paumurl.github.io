@@ -71,6 +71,7 @@
             text-shadow: 2px 2px 0px #000;
             margin-bottom: 15px;
             line-height: 1.4;
+            cursor: default;
         }
 
         /* TYPEWRITER STYLES */
@@ -134,7 +135,7 @@
         .intro-text { font-size: 1.1rem; margin-bottom: 25px; }
         .highlight { background: rgba(255, 77, 77, 0.1); border-bottom: 2px solid var(--primary-red); font-weight: bold; }
 
-        /* TECH STACK BADGES (NEW) */
+        /* TECH STACK BADGES */
         .tech-stack-container {
             margin: 20px 0 30px 0;
             display: flex;
@@ -153,7 +154,6 @@
             transition: transform 0.1s;
             cursor: default;
         }
-        
         .tech-badge:hover { transform: translateY(-3px); }
 
         /* --- CONTACT SECTION --- */
@@ -190,13 +190,9 @@
             filter: drop-shadow(6px 6px 0px rgba(0,0,0,0.3));
         }
 
-        .image-container img:active {
-            transform: scale(0.95);
-        }
+        .image-container img:active { transform: scale(0.95); }
 
-        .text-container {
-            text-align: center; 
-        }
+        .text-container { text-align: center; }
 
         .contact-label {
             font-family: 'Press Start 2P', cursive;
@@ -216,10 +212,7 @@
             transition: border-color 0.2s;
             word-break: break-all;
         }
-        
-        .contact-email:hover {
-            border-bottom-color: var(--primary-red);
-        }
+        .contact-email:hover { border-bottom-color: var(--primary-red); }
 
         .footer-note {
             margin-top: 25px;
@@ -294,13 +287,12 @@
         
         .scroll-msg.danger { 
             color: red; 
-            font-size: 16px; 
+            font-size: 18px; 
             background: #000; 
             box-shadow: 0 0 20px red; 
             animation: danger-pulse 2s infinite ease-in-out; 
-            padding: 16px 24px !important;
         }
-        
+
         @keyframes danger-pulse { 
             0% { transform: scale(1); } 
             50% { transform: scale(1.05); } 
@@ -310,7 +302,7 @@
         /* --- POLICE LINE --- */
         .marquee-container {
             width: 100%;
-            max-width: 100vw; /* Fixes mobile overflow */
+            max-width: 100vw;
             background: #ffd700;
             border-top: 3px solid #000;
             border-bottom: 3px solid #000;
@@ -339,7 +331,7 @@
             100% { transform: translateX(-50%); } 
         }
 
-        /* --- FOOTER GAME --- */
+        /* --- FOOTER TRIGGERS (UPDATED) --- */
         footer { 
             text-align: center; 
             padding: 70px 0 100px; 
@@ -351,24 +343,43 @@
             background-position: 0 0, 15px 15px;
             background-size: 30px 30px;
         }
+
+        .footer-triggers {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px; /* Space between egg and red button */
+            flex-wrap: wrap;
+        }
         
-        #egg-trigger { 
+        /* SHARED STYLES FOR EGG & RED BUTTON */
+        .trigger-item {
             cursor: pointer; 
             display: inline-block; 
             padding: 30px; 
-            border: 4px dashed #ff3333; 
             background-color: #fff; 
             border-radius: 12px; 
             transition: all 0.2s; 
             pointer-events: auto; 
             box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
         }
-        
+
+        /* EGG STYLES */
+        #egg-trigger { border: 4px dashed #ff3333; }
         #egg-trigger:hover { 
             background-color: #ffcccc; 
             box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); 
             animation: egg-wiggle 1.2s ease-in-out infinite;
             border-color: red; 
+        }
+
+        /* RED BUTTON (DANGER) STYLES */
+        #danger-trigger { border: 4px dashed #000; }
+        #danger-trigger:hover {
+            background-color: #ffe6e6;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+            animation: danger-shake 0.5s infinite;
+            border-color: black;
         }
 
         @keyframes egg-wiggle {
@@ -381,8 +392,42 @@
             100% { transform: rotate(0deg) translateX(0) scale(1.05); }
         }
 
-        .warning-text { font-family: 'Press Start 2P', cursive; color: #ff0000; font-size: 12px; margin-bottom: 10px; animation: blink 0.8s infinite; }
+        @keyframes danger-shake {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-2px, 2px) rotate(-2deg); }
+            50% { transform: translate(2px, -2px) rotate(2deg); }
+            75% { transform: translate(-2px, -2px) rotate(-1deg); }
+        }
+
+        .warning-text { font-family: 'Press Start 2P', cursive; color: #ff0000; font-size: 10px; margin-bottom: 10px; animation: blink 0.8s infinite; }
         .pixel-egg { font-size: 50px; display: block; }
+
+        /* --- BSOD STYLE --- */
+        #bsod {
+            display: none; 
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: #0078d7;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            z-index: 2147483647; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; 
+            padding: 20px;
+            text-align: left; 
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        #bsod p { margin: 10px 0; max-width: 800px; width: 100%; }
+        #bsod .sad-face { 
+            font-size: 80px; 
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
 
         /* --- GAME OVERLAY STYLES & TRANSITION --- */
         #game-overlay {
@@ -413,7 +458,6 @@
             100% { transform: scaleX(1) scaleY(1); opacity: 1; }
         }
 
-        /* NEW: CRT Turn Off Animation */
         #game-overlay.crt-turn-off {
             animation: crtTurnOff 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
@@ -469,7 +513,7 @@
         .card.uncommon { border-color: #007bff; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
         .card.rare { border-color: #ffd700; background: linear-gradient(135deg, #fff 0%, #fff9e6 100%); box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
 
-        /* LEGENDARY CARD STYLE (UPDATED: Holographic) */
+        /* LEGENDARY CARD STYLE (Holographic) */
         .card.legendary {
             border-color: #9d00ff;
             background: linear-gradient(135deg, #fff 0%, #f3e5f5 100%);
@@ -479,7 +523,6 @@
             overflow: hidden;
         }
         
-        /* Holographic sheen */
         .card.legendary::before {
             content: "";
             position: absolute;
@@ -531,6 +574,8 @@
             .text-container { text-align: center; }
             .nav-btn { padding: 8px 10px; font-size: 9px; }
             .scroll-msg { margin-left: 32px; margin-right: 32px; width: auto; }
+            #bsod { font-size: 20px; padding: 40px 20px; }
+            .footer-triggers { gap: 20px; }
         }
 
     </style>
@@ -547,7 +592,6 @@
         
         <nav>
             <ul>
-                <!-- Security Update: Added rel="noopener noreferrer" -->
                 <li><a class="nav-btn" href="resume_PaulaRobles.pdf" target="_blank" rel="noopener noreferrer">Resumé</a></li>
                 <li><a class="nav-btn" href="https://github.com/paumurl" target="_blank" rel="noopener noreferrer">Projects</a></li>
                 <li><a class="nav-btn" href="https://www.linkedin.com/in/paula-robles-lopez/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
@@ -564,7 +608,7 @@
                 With over <strong>2 years</strong> of hands-on experience. My skillset covers <span class="highlight">Python</span>, <span class="highlight">SQL analytics</span>, <span class="highlight">DevOps</span> practices, and <span class="highlight">Cloud infrastructure</span>.
             </p>
             
-            <!-- NEW: Tech Stack Badges for quick recruiter scanning -->
+            <!-- TECH STACK BADGES -->
             <div class="tech-stack-container">
                 <span class="tech-badge">PYTHON</span>
                 <span class="tech-badge">SQL</span>
@@ -575,7 +619,7 @@
                 <span class="tech-badge">GIT</span>
             </div>
 
-            <p style="font-size: 0.9rem; color: #666;">
+            <p style="font-size: 0.9rem; opacity: 0.7;">
                 🌠 Currently diving deeper into DevOps!
             </p>
         </section>
@@ -595,7 +639,7 @@
         </div>
     </main>
     
-    <!-- Updated: Hint container now triggers scroll -->
+    <!-- Hint container with Scroll Function -->
     <div class="hint-container" title="Are you sure?" onclick="scrollToSecret()">
         <div class="hint-arrow">☟</div>
         <div class="hint-text">(nothing to see beloW)</div>
@@ -642,11 +686,31 @@
 </div>
 
 <footer>
-    <div id="egg-trigger" title="Nothing to see here...">
-        <div class="warning-text">DO NOT CLICK!</div>
-        <div class="pixel-egg">🥚</div>
+    <div class="footer-triggers">
+
+        <!-- THE RED BUTTON (BSOD) -->
+        <div id="danger-trigger" class="trigger-item" title="DEFINITELY NO.">
+            <div class="warning-text">NO!</div>
+            <div class="pixel-egg">🔴</div>
+        </div>
+        <!-- THE EGG (Game) -->
+        <div id="egg-trigger" class="trigger-item" title="Nothing to see here...">
+            <div class="warning-text">OPEN?</div>
+            <div class="pixel-egg">🥚</div>
+        </div>
+
+
     </div>
 </footer>
+
+<!-- BSOD PRANK OVERLAY -->
+<div id="bsod" onclick="this.style.display='none'">
+    <div class="sad-face">:(</div>
+    <p style="font-size: 24px;">Your PC ran into a problem because you didn't listen to Paula.</p>
+    <p style="font-size: 14px; margin-top: 20px;">For more information about this issue and possible fixes, visit https://www.linkedin.com/in/paula-robles-lopez/</p>
+    <p style="font-size: 14px; margin-top: 30px;">Stop code: UNAUTHORIZED_USER_DETECTED</p>
+    <p style="font-size: 12px; margin-top: 50px; opacity: 0.7;">(Click anywhere to restart)</p>
+</div>
 
 <!-- EASTER EGG GAME OVERLAY -->
 <div id="game-overlay">
@@ -671,7 +735,7 @@
     <!-- CONTROLS -->
     <div id="game-controls" style="display:none; gap:10px;">
         <button class="pixel-btn" onclick="drawNextCard()">NEXT</button>
-        <button class="pixel-btn" style="background:#ffcccc;" onclick="closeGame()">Close</button>
+        <button class="pixel-btn" style="background:#ffcccc; color:#000;" onclick="closeGame()">Close</button>
     </div>
 </div>
 
@@ -688,13 +752,22 @@
             setTimeout(typeWriter, 100); 
         }
     }
-    
     window.addEventListener('load', typeWriter);
 
-    /* --- NEW: SCROLL FUNCTION FOR HINT ARROW --- */
+    /* --- SCROLL FUNCTION --- */
     function scrollToSecret() {
         const prelude = document.querySelector('.prelude-spacer');
         prelude.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* --- RED BUTTON LOGIC --- */
+    const dangerTrigger = document.getElementById('danger-trigger');
+    const bsod = document.getElementById('bsod');
+    
+    if (dangerTrigger) {
+        dangerTrigger.addEventListener('click', () => {
+            bsod.style.display = 'flex';
+        });
     }
 
     /* --- 0. EASTER EGGS --- */
@@ -754,7 +827,7 @@
         document.body.style.transition = "background-color 0.5s";
         document.body.style.backgroundColor = "#e6ffe6"; 
         
-        const emojis = ['🎈', '🐍', '💾', '🎉', '👾', '☁️', '🎂'];
+        const emojis = ['🍜', '🍣', '🎉', '🥟', '🧋', '🥢', '🍱', '🍻', '🍤', '🥡', '✨'];
         for (let i = 0; i < 50; i++) {
             const particle = document.createElement('div');
             particle.innerText = emojis[Math.floor(Math.random() * emojis.length)];
@@ -805,15 +878,15 @@
     ];
 
     /* --- 3. GAME LOGIC --- */
-    const trigger = document.getElementById('egg-trigger');
+    const eggTrigger = document.getElementById('egg-trigger'); // Updated selector
     const overlay = document.getElementById('game-overlay');
     const pack = document.getElementById('pack');
     const cardDisplay = document.getElementById('card-display');
     const controls = document.getElementById('game-controls');
     let availableIndices = [];
 
-    if(trigger) {
-        trigger.addEventListener('click', () => {
+    if(eggTrigger) {
+        eggTrigger.addEventListener('click', () => {
             launchGame();
         });
     }
@@ -821,7 +894,7 @@
     function launchGame() {
         resetDeck();
         resetGame();
-        overlay.classList.remove('crt-turn-off'); // Ensure previous close anim is gone
+        overlay.classList.remove('crt-turn-off');
         overlay.classList.add('crt-active'); 
         pack.classList.remove('pack-appear');
         void pack.offsetWidth; 
@@ -829,10 +902,9 @@
     }
 
     function closeGame() {
-        // Trigger CRT Turn Off Animation
         overlay.classList.add('crt-turn-off');
         
-        // Wait for animation to finish before hiding
+        // Wait for animation
         setTimeout(() => {
             overlay.classList.remove('crt-active');
             overlay.classList.remove('crt-turn-off');
